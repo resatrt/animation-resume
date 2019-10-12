@@ -1,0 +1,23 @@
+.token.selector{
+    color: black;
+}
+.token.property{
+    color: black;
+}
+.token.function{
+    color: black;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#code{
+    height: 100vh;
+    overflow: hidden;
+}
+
+#paper>.content{
+    padding-left:16px ;
+}
