@@ -33,7 +33,6 @@ padding:16px;
 .token.function{
   color: #DD4A68;
 }
-/*此处加高亮是为了有个颜色过渡的效果，将高亮代码的库里的样式先变为黑色，然后通过写入代码使其高亮*/
 
 /*加点3D效果*/
 #code{
@@ -48,6 +47,7 @@ padding:16px;
 
 }
 
+
 `
 
 var result2 = `
@@ -56,25 +56,30 @@ var result2 = `
     right:0;
     width:50%;
     height:100%;
-    background:gray;
-    padding:3px;
+    background:white;
+    border:3px solid gray;
 } 
- #paper > .content{
-      width:100%;
-      height:100%;
-      background:white;
-    }
 
+ ul> li > p > img{
+   width:400px;
+   height:300px;
+
+ }
  `
 var md = `
 
 自我介绍
 -------
 
+
 我叫xxx
+
 1989年9月出生
+
 xxxx学校毕业
+
 自学前端半年
+
 希望应聘前端开发岗位
 
 技能介绍
@@ -85,15 +90,25 @@ xxxx学校毕业
 项目介绍
 -------
 
-- xxx轮播
-- xxx简历
-- xxx画板
+- [苹果风格轮播](https://resatrt.github.io/Apple-slides/index.html)
+  ![轮播图片](./picture/Apple-like_Slides.png)
+
+- [键盘导航](https://resatrt.github.io/keyboard-navigation/boring.html)
+  ![导航图片](./picture/nav.png)
+
+- [canvas画板](https://resatrt.github.io/canvas-/)
+  ![画板图片](./picture/canvas.png)
+
 
 联系方式
 -------
-> QQ xxxxxxx
-> email xxxxxxxx
-> 手机 xxxxxxxxxxx
+
+ QQ xxxxxxx
+
+ email xxxxxxxx
+
+ 手机 xxxxxxxxxxx
+
 `
 
 var result3 = `
@@ -129,7 +144,7 @@ writeCode('', result, () => { //writeCode call the function
     writeCode(result, result2, () => {
       writeMD(md, () => {
         beforeToHtml(result3, () => {
-          markdownToHtml(md +result4)
+          markdownToHtml(md + result4)
         })
       })
     })  //结果就是result+result2=domCode,innerHTML
@@ -139,17 +154,17 @@ writeCode('', result, () => { //writeCode call the function
 
 //新建一个div放到pre标签下面
 function createPaper(fn) {
-  var paper = document.createElement('div')
+  var paper = document.createElement('pre')
   paper.id = 'paper'
   document.body.appendChild(paper)
-  var content = document.createElement('pre')
-  content.className = 'content'
-  paper.appendChild(content)
+  // var content = document.createElement('pre')
+  // content.className = 'content'
+  // paper.appendChild(content)
   fn.call()
 }
 
 function writeMD(markdown, fn) {
-  let domPaper = document.querySelector('#paper>.content')
+  let domPaper = document.querySelector('#paper')
   let n = 0
   let timer = setInterval(() => {
     n += 1
@@ -163,12 +178,12 @@ function writeMD(markdown, fn) {
 }
 
 function beforeToHtml(result, fn) {
-  let  domPaper= document.querySelector('#paper>.content')
+  let domPaper = document.querySelector('#paper')
   let n = 0
   let timer = setInterval(() => {
     n += 1
     domPaper.innerHTML = result.substring(0, n)
-    domPaper.scrollTop =  domPaper.scrollHeight
+    domPaper.scrollTop = domPaper.scrollHeight
     if (n >= result.length) {
       window.clearInterval(timer)
       fn.call()
@@ -178,12 +193,13 @@ function beforeToHtml(result, fn) {
 
 
 function markdownToHtml(markdown) {
-  let  domPaper = document.querySelector('#paper>.content')
+  let domPaper = document.querySelector('#paper')
   let n = 0
   let timer = setInterval(() => {
     n += 1
+
     domPaper.innerHTML = marked(markdown).substring(0, n)
-    domPaper.scrollTop =  domPaper.scrollHeight
+    domPaper.scrollTop = domPaper.scrollHeight
     if (n >= markdown.length) {
       window.clearInterval(timer)
 

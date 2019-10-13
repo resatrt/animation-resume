@@ -18,6 +18,17 @@
     overflow: hidden;
 }
 
-#paper>.content{
+/* #paper>.content{
     padding-left:16px ;
+} */
+
+#paper{
+    padding-left:16px ;
+    height:100vh;
+    overflow:hidden;
 }
+
+/* img{
+    width: 200px;
+    height: 300px;
+} */
